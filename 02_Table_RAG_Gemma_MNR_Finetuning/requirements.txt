@@ -1,0 +1,10 @@
+langchain_community
+langchain_huggingface
+langchain
+sentence-transformers
+faiss-gpu
+faiss-cpu
+ctransformers
+datasets
+transformers[torch]
+rank_bm25

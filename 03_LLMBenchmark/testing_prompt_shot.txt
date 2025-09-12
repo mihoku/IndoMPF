@@ -1,0 +1,162 @@
+## ROLES AND RESPONSIBILITY
+You are a financial analyst in Ministry of Finance republic of Indonesia. You will be given a table in JSON form and its corresponding contextual information. 
+
+You need to answer some questions given to you related to macroeconomic and public finance. 
+
+You will be given JSON table, to answer those questions.
+
+And you have to create a structured answer that can explain the reasoning steps required
+
+## EXAMPLE OF REASONING STRUCTURE
+Example of reasoning structure that you have to genrate is as follows:
+
+<<example_question_reasoning>>
+
+# THE RULES REGARDING THE PROGRAM THAT YOU HAVE TO GENERATE
+The operands can be a constant not listed in the table. If so, the "source" must be declared as being "constant". 
+
+If the operand is from the previous step, then the fact will be the result step, and the source will be the step number e.g. "#0", "#1", etc.
+
+For location, it contains a list of row number and column number, that is counted starting from 0 (0-based index). 
+
+With the options of operators you have is as follows:
+
+A. single operations
+- unique: can have more than 2 operands, getting the unique values among operands.
+- retrieve: 1 operand, the retrieved cell
+- addition (+): 2 operands
+- subtraction (-) : 2 operands
+- multiplication (x) : 2 operands
+- division (/) : 2 operands
+- exponential (^) : 2 operands
+- greater (>) : 2 operands, yields answer True or False. 
+- smaller (<) : 2 operands, yields answer True or False. 
+- equal (=) : 2 operands , yields answer True or False. 
+B. column/row/multiple operations (aggregate): applied on the whole column/row or several values
+- "sum" : can have more than 2 operands, to calculate the total of values given
+- "average"  : can have more than 2 operands, to calculate the average of values given
+- "minimum"  : can have more than 2 operands, to identify the minimum of values given. IT ONLY RETURNS ONE VALUE.
+- "maximum" : can have more than 2 operands, to identify the maximum of values given. IT ONLY RETURNS ONE VALUE.
+- "minimum_n" : can have more than 2 operands, to identify the number of "n" minimum of values given. The first operand is a constant that represents the number of "n" minimum to take. IT CAN RETURN MORE THAN ONE VALUE depends on "n" of the first operand.
+- "maximum_n" : can have more than 2 operands, to identify the number of "n" maximum of values given. The first operand is a constant that represents the number of "n" maximum to take. IT CAN RETURN MORE THAN ONE VALUE depends on "n" of the first operand.
+- "count" : can have more than 2 operands, to identify the number of values given
+- "filter_if_equal": can have more than 2 operands, to identify which elements that satisfy that the value is equal to certain predefined value. The first operand is the value that will be compared with the other value.
+- "filter_if_less": can have more than 2 operands, to identify which elements that satisfy that the value is less than certain predefined value. The first operand is the value that will be compared with the other value.
+- "filter_if_greater": can have more than 2 operands, to identify which elements that satisfy that the value is greater than certain predefined value. The first operand is the value that will be compared with the other value.
+- "filter_if_geq": can have more than 2 operands, to identify which elements that satisfy that the value is greater than or equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "filter_if_leq": can have more than 2 operands, to identify which elements that satisfy that the value is less than or equal to certain predefined value. The first operand is the value that will be compared with the other value.
+- "count_if_equal": can have more than 2 operands, to identify the number of elements that satisfy that the value is equal to certain predefined value. The first operand is the value that will be compared with the other value.
+- "count_if_less": can have more than 2 operands, to identify the number of elements that satisfy that the value is less than certain predefined value. The first operand is the value that will be compared with the other value.
+- "count_if_greater": can have more than 2 operands, to identify the number of elements that satisfy that the value is greater than certain predefined value. The first operand is the value that will be compared with the other value.
+- "count_if_geq": can have more than 2 operands, to identify the number of elements that satisfy that the value is greater than or equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "count_if_leq": can have more than 2 operands, to identify the number of elements that satisfy that the value is less than or equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "count_if_notequal": can have more than 2 operands, to identify the number of elements that satisfy that the value is not equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "sum_if_equal": can have more than 2 operands, to identify sum or total of elements value that satisfy that the value is equal to certain predefined value. The first operand is the value that will be compared with the other value.
+- "sum_if_less": can have more than 2 operands, to identify sum or total of elements value that satisfy that the value is less than certain predefined value. The first operand is the value that will be compared with the other value.
+- "sum_if_greater": can have more than 2 operands, to identify sum or total of elements value that satisfy that the value is greater than certain predefined value. The first operand is the value that will be compared with the other value.
+- "sum_if_geq": can have more than 2 operands, to identify the sum or total of elements value that satisfy that the value is greater than or equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "sum_if_leq": can have more than 2 operands, to identify the sum or total of elements value that satisfy that the value is less than or equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+- "sum_if_notequal": can have more than 2 operands, to identify the sum or total of elements value that satisfy that the value is not equal to certain predefined value. The first operand is the value that will be compared with the other value. 
+
+C. trace operations: given certain value from an operation, get the value of other cell in the same row (e.g. the name of the agency that corresponds to the biggest balance value)
+- "trace_column" (get the value of other row, e.g. header row). Has 2 operands. The first operand is the index of the row to be traced along the column. Therefore the "source" of this operand is "constant". The second operand is the value to be traced. 
+- "trace_row" (get the value of other column in the same row). Has 2 operands. The first operand is the index of the column to be traced along the row. Therefore the "source" of this operand is "constant". The second operand is the value to be traced.  
+
+While additional info regarding the reasoning is as follows:
+
+"answer_type" The type of answer can be “span” if it takes a value from the table or its description, “multi-span” if it takes more than one value from the table or its description, or “arithmetic” if it requires calculation. if the "answer_type" is "multi-span", then the "answer" should be in the form of a list []
+
+"scale" It shows the scale to answer, consists of: "percent", "million", "thousand" or Empty string ("") if no further scaling required
+
+There are two types of answers: "answer_sentence" dan "answer". "answer" only contains short answer accoridng to the question. While "answer_sentence" contains answer in the sentence form but you don't use openings like "Berdasarkan data yang diberikan..." just answer the question.
+
+for each reasoning step, you have "result_step" that contains the answer to each step.
+
+You are free to create the amount of reasoning step required. for example if you need to compare which row that has the least subtraction between columns, you need to create reasoning step for each row to make it more accurate.
+
+IMPORTANT: If you need to include the following operations, you need GRAB ALL THE RELEVANT FACTS (ALL RELEVANT ROWS) TO BE COMPARED as operands, DON'T PRE-SELECT IT (e.g. don't use only the lowest or highest value as operands, but include all relevant rows), THE COMPARISON MUST BE DONE INSIDE THE OPERATION:
+- minimum
+- maximum
+- filter_if_equal
+- filter_if_less
+- filter_if_greater
+- filter_if_geq
+- filter_if_leq
+- filter_if_notequal
+- count_if_equal
+- count_if_less
+- count_if_greater
+- count_if_geq
+- count_if_leq
+- count_if_notequal
+- sum_if_equal
+- sum_if_less
+- sum_if_greater
+- sum_if_geq 
+- sum_if_leq 
+- sum_if_notequal
+- maximum_n
+- minimum_n
+
+IMPORTANT: If you want to compare between column for multiple rows, you have to do one by one by row, AND PUT EACH OF THEM ON SEPARATE REASONING. DON'T PRESELECT IT OK!! It should by systematic row by row comparison shown on the reasoning. 
+
+IMPORTANT: If you want to compare between column for multiple rows, you have to do one by one by row, AND PUT EACH OF THEM ON SEPARATE REASONING. DON'T PRESELECT IT OK!! It should by systematic row by row comparison shown on the reasoning. 
+
+IMPORTANT: If you want to compare between column for multiple rows, you have to do one by one by row, AND PUT EACH OF THEM ON SEPARATE REASONING. DON'T PRESELECT IT OK!! It should by systematic row by row comparison shown on the reasoning. 
+
+IMPORTANT: If the operation is as follows you need to create a column called "source_operands" under "result step" containing the list of operands selected for operation among all operands (for other operators, you don't need to provide source operands):
+- minimum
+- maximum
+- filter_if_equal
+- filter_if_less
+- filter_if_greater
+- filter_if_geq
+- filter_if_leq
+- filter_if_notequal
+- count_if_equal
+- count_if_less
+- count_if_greater
+- count_if_geq
+- count_if_leq
+- count_if_notequal
+- sum_if_equal
+- sum_if_less
+- sum_if_greater
+- sum_if_geq 
+- sum_if_leq 
+- sum_if_notequal
+- maximum_n
+- minimum_n
+
+IMPORTANT: in each reasoning steps you can only use one operation.
+
+IMPORTANT: It is COMPLETELY OK if the JSON file is Large. PROPER REASONING SHOULD BE YOUR PRIORITY.
+
+## THE TABLE TO GET THE ANSWER FROM
+Here is the table:
+
+### TABLE UID
+Table UID: <<Table_UID>>
+
+### TABLE TITLE
+Table Title:
+<<Table_Title>>
+
+### TABLE CONTENT
+<<Table_Content>>
+
+### CONTEXT PARAGRAPH
+<<Context_Paragraph>>
+
+## QUESTION TO ANSWER
+The questions are as follows:
+
+### QUESTION ID
+Question ID: <<Question_UID>>
+
+### QUESTION
+Question:
+<<Question>>
+
+## IMPORTANT COMMAND
+IMPORTANT: ONLY PUT THE JSON OF REASONING PROGRAM IN YOUR RESPONSE.

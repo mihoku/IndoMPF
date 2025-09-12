@@ -1,0 +1,42 @@
+✅  Detailed evaluation results saved to 'data/evaluation_results_unfinetuned.json'
+
+--- Retrieval Evaluation Results ---
+Accuracy@1:               0.2016
+Accuracy@5 (Recall@5):    0.3638
+MRR (Mean Reciprocal Rank): 0.2768
+------------------------------------
+
+✅  Detailed evaluation results saved to 'data/hybrid_retrieval_evaluation_results_gemma3_unfinetuned.json'
+
+--- HYBRID Retrieval Evaluation Results ---
+Accuracy@1:               0.2016
+Accuracy@5 (Recall@5):    0.8335
+MRR (Mean Reciprocal Rank): 0.5072
+------------------------------------
+
+--- Step 1: Evaluating retriever on the TRAINING set ---
+--- Running in EVALUATE mode ---
+
+Evaluating retriever on 4475 test questions...
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4475/4475 [10:30<00:00,  7.10it/s]
+
+✅  Detailed evaluation results saved to 'data/train_eval_results.json'
+
+--- Retrieval Evaluation Results ---
+Accuracy@1:               0.1946
+Accuracy@5 (Recall@5):    0.3785
+MRR (Mean Reciprocal Rank): 0.2766
+------------------------------------
+\n--- Step 2: Evaluating retriever on the VALIDATION set ---
+--- Running in EVALUATE mode ---
+
+Evaluating retriever on 1119 test questions...
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1119/1119 [03:26<00:00,  5.43it/s]
+
+✅  Detailed evaluation results saved to 'data/val_eval_results.json'
+
+--- Retrieval Evaluation Results ---
+Accuracy@1:               0.1859
+Accuracy@5 (Recall@5):    0.3825
+MRR (Mean Reciprocal Rank): 0.2731
+------------------------------------

@@ -1,0 +1,9 @@
+Parsing golden dataset from data/dataset_table_final.json...
+Successfully parsed 6993 question-answer pairs.
+
+Dataset split complete:
+- Training set size: 4475
+- Validation set size: 1119
+- Test set size: 1399
+
+Datasets saved to data/train_set.json, data/val_set.json, and data/test_set.json

@@ -1,0 +1,20 @@
+Starting evaluation for all checkpoints in: mnr-checkpoints
+Detailed JSON results will be saved in the 'data/' directory.
+===================================================================
+
+--- Evaluating: checkpoint-26017 ---
+--- Running in EVALUATE mode ---
+Loading pre-saved LangChain documents...
+
+Evaluating retriever on 1399 test questions...
+
+✅ Detailed evaluation results saved to 'data/evaluation_results_test_mnr_finetuning_checkpoint-26017.json'
+
+--- HYBRID Retrieval Evaluation Results ---
+Accuracy@1:               0.9671
+Accuracy@5 (Recall@5):    0.9986
+MRR (Mean Reciprocal Rank): 0.9822
+------------------------------------
+
+===================================================================
+✅ All checkpoint evaluations are complete.
